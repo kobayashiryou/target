@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :company_targets
   resources :department_targets
   resources :todo_targets
   resources :todos
