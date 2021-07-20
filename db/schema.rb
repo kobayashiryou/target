@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_20_010230) do
+ActiveRecord::Schema.define(version: 2021_07_20_044316) do
 
   create_table "companies", charset: "utf8", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -37,6 +37,24 @@ ActiveRecord::Schema.define(version: 2021_07_20_010230) do
     t.index ["uid", "provider"], name: "index_companies_on_uid_and_provider", unique: true
   end
 
+  create_table "company_targets", charset: "utf8", force: :cascade do |t|
+    t.string "monthly_target"
+    t.string "anually_target"
+    t.bigint "company_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["company_id"], name: "index_company_targets_on_company_id"
+  end
+
+  create_table "department_targets", charset: "utf8", force: :cascade do |t|
+    t.string "monthly_target"
+    t.string "anually_target"
+    t.bigint "department_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["department_id"], name: "index_department_targets_on_department_id"
+  end
+
   create_table "departments", charset: "utf8", force: :cascade do |t|
     t.string "provider", default: "email", null: false
     t.string "uid", default: "", null: false
@@ -60,6 +78,14 @@ ActiveRecord::Schema.define(version: 2021_07_20_010230) do
     t.index ["email"], name: "index_departments_on_email", unique: true
     t.index ["reset_password_token"], name: "index_departments_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_departments_on_uid_and_provider", unique: true
+  end
+
+  create_table "todo_targets", charset: "utf8", force: :cascade do |t|
+    t.string "body"
+    t.bigint "department_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["department_id"], name: "index_todo_targets_on_department_id"
   end
 
   create_table "todos", charset: "utf8", force: :cascade do |t|
@@ -95,5 +121,8 @@ ActiveRecord::Schema.define(version: 2021_07_20_010230) do
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
+  add_foreign_key "company_targets", "companies"
+  add_foreign_key "department_targets", "departments"
+  add_foreign_key "todo_targets", "departments"
   add_foreign_key "todos", "users"
 end

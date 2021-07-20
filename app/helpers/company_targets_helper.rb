@@ -1,0 +1,2 @@
+module CompanyTargetsHelper
+end
