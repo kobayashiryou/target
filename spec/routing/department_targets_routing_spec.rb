@@ -18,7 +18,6 @@ RSpec.describe DepartmentTargetsController, type: :routing do
       expect(get: "/department_targets/1/edit").to route_to("department_targets#edit", id: "1")
     end
 
-
     it "routes to #create" do
       expect(post: "/department_targets").to route_to("department_targets#create")
     end

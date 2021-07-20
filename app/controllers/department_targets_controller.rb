@@ -1,5 +1,5 @@
 class DepartmentTargetsController < ApplicationController
-  before_action :set_department_target, only: %i[ show edit update destroy ]
+  before_action :set_department_target, only: %i[show edit update destroy]
 
   # GET /department_targets or /department_targets.json
   def index
@@ -57,6 +57,7 @@ class DepartmentTargetsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_department_target
       @department_target = DepartmentTarget.find(params[:id])
