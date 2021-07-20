@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_20_044316) do
+ActiveRecord::Schema.define(version: 2021_07_20_070737) do
 
   create_table "companies", charset: "utf8", force: :cascade do |t|
     t.string "provider", default: "email", null: false
@@ -93,6 +93,8 @@ ActiveRecord::Schema.define(version: 2021_07_20_044316) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "todo_target_id", null: false
+    t.index ["todo_target_id"], name: "index_todos_on_todo_target_id"
     t.index ["user_id"], name: "index_todos_on_user_id"
   end
 
@@ -124,5 +126,6 @@ ActiveRecord::Schema.define(version: 2021_07_20_044316) do
   add_foreign_key "company_targets", "companies"
   add_foreign_key "department_targets", "departments"
   add_foreign_key "todo_targets", "departments"
+  add_foreign_key "todos", "todo_targets"
   add_foreign_key "todos", "users"
 end
