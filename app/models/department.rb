@@ -6,4 +6,5 @@ class Department < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   include DeviseTokenAuth::Concerns::User
+  has_many :todo_targets, dependent: :destroy
 end
