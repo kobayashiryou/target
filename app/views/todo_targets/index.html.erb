@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Todo Targets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Body</th>
+      <th>Department</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @todo_targets.each do |todo_target| %>
+      <tr>
+        <td><%= todo_target.body %></td>
+        <td><%= todo_target.department_id %></td>
+        <td><%= link_to 'Show', todo_target %></td>
+        <td><%= link_to 'Edit', edit_todo_target_path(todo_target) %></td>
+        <td><%= link_to 'Destroy', todo_target, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Todo Target', new_todo_target_path %>

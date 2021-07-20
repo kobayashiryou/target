@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @todo_target.body %>
+</p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @todo_target.department_id %>
+</p>
+
+<%= link_to 'Edit', edit_todo_target_path(@todo_target) %> |
+<%= link_to 'Back', todo_targets_path %>
