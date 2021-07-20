@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Department Targets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Monthly target</th>
+      <th>Anually target</th>
+      <th>Department</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @department_targets.each do |department_target| %>
+      <tr>
+        <td><%= department_target.monthly_target %></td>
+        <td><%= department_target.anually_target %></td>
+        <td><%= department_target.department_id %></td>
+        <td><%= link_to 'Show', department_target %></td>
+        <td><%= link_to 'Edit', edit_department_target_path(department_target) %></td>
+        <td><%= link_to 'Destroy', department_target, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Department Target', new_department_target_path %>
