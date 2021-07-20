@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :department_targets
   resources :todo_targets
   resources :todos
   mount_devise_token_auth_for "User", at: "auth"

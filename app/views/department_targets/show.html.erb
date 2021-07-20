@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Monthly target:</strong>
+  <%= @department_target.monthly_target %>
+</p>
+
+<p>
+  <strong>Anually target:</strong>
+  <%= @department_target.anually_target %>
+</p>
+
+<p>
+  <strong>Department:</strong>
+  <%= @department_target.department_id %>
+</p>
+
+<%= link_to 'Edit', edit_department_target_path(@department_target) %> |
+<%= link_to 'Back', department_targets_path %>
