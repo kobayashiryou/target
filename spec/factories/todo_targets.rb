@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :todo_target do
-    body { "MyString" }
-    department { nil }
+    body { Faker::Lorem.sentence }
+    department
   end
 end

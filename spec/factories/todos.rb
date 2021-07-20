@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :todo do
-    body { "MyString" }
-    user { nil }
+    body { Faker::Lorem.sentence }
+    user
+    todo_target
   end
 end
