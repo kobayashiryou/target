@@ -1,16 +1,16 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "todos/index", type: :view do
-  before(:each) do
+  before do
     assign(:todos, [
       Todo.create!(
         body: "Body",
-        user: nil
+        user: nil,
       ),
       Todo.create!(
         body: "Body",
-        user: nil
-      )
+        user: nil,
+      ),
     ])
   end
 

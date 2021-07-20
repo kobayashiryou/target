@@ -1,11 +1,11 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "todos/show", type: :view do
-  before(:each) do
+  before do
     @todo = assign(:todo, Todo.create!(
-      body: "Body",
-      user: nil
-    ))
+                            body: "Body",
+                            user: nil,
+                          ))
   end
 
   it "renders attributes in <p>" do
