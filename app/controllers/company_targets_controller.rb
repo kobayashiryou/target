@@ -1,5 +1,5 @@
 class CompanyTargetsController < ApplicationController
-  before_action :set_company_target, only: %i[ show edit update destroy ]
+  before_action :set_company_target, only: %i[show edit update destroy]
 
   # GET /company_targets or /company_targets.json
   def index
@@ -57,6 +57,7 @@ class CompanyTargetsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_company_target
       @company_target = CompanyTarget.find(params[:id])

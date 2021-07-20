@@ -1,12 +1,12 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "company_targets/show", type: :view do
-  before(:each) do
+  before do
     @company_target = assign(:company_target, CompanyTarget.create!(
-      monthly_target: "Monthly Target",
-      anually_target: "Anually Target",
-      company: nil
-    ))
+                                                monthly_target: "Monthly Target",
+                                                anually_target: "Anually Target",
+                                                company: nil,
+                                              ))
   end
 
   it "renders attributes in <p>" do

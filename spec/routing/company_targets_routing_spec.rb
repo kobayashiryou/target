@@ -18,7 +18,6 @@ RSpec.describe CompanyTargetsController, type: :routing do
       expect(get: "/company_targets/1/edit").to route_to("company_targets#edit", id: "1")
     end
 
-
     it "routes to #create" do
       expect(post: "/company_targets").to route_to("company_targets#create")
     end

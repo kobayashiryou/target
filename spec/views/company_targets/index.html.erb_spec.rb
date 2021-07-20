@@ -1,18 +1,18 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "company_targets/index", type: :view do
-  before(:each) do
+  before do
     assign(:company_targets, [
       CompanyTarget.create!(
         monthly_target: "Monthly Target",
         anually_target: "Anually Target",
-        company: nil
+        company: nil,
       ),
       CompanyTarget.create!(
         monthly_target: "Monthly Target",
         anually_target: "Anually Target",
-        company: nil
-      )
+        company: nil,
+      ),
     ])
   end
 
