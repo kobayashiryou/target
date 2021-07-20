@@ -1,16 +1,16 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe "todo_targets/index", type: :view do
-  before(:each) do
+  before do
     assign(:todo_targets, [
       TodoTarget.create!(
         body: "Body",
-        department: nil
+        department: nil,
       ),
       TodoTarget.create!(
         body: "Body",
-        department: nil
-      )
+        department: nil,
+      ),
     ])
   end
 

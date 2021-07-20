@@ -1,5 +1,5 @@
 class TodoTargetsController < ApplicationController
-  before_action :set_todo_target, only: %i[ show edit update destroy ]
+  before_action :set_todo_target, only: %i[show edit update destroy]
 
   # GET /todo_targets or /todo_targets.json
   def index
@@ -57,6 +57,7 @@ class TodoTargetsController < ApplicationController
   end
 
   private
+
     # Use callbacks to share common setup or constraints between actions.
     def set_todo_target
       @todo_target = TodoTarget.find(params[:id])

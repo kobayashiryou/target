@@ -18,7 +18,6 @@ RSpec.describe TodoTargetsController, type: :routing do
       expect(get: "/todo_targets/1/edit").to route_to("todo_targets#edit", id: "1")
     end
 
-
     it "routes to #create" do
       expect(post: "/todo_targets").to route_to("todo_targets#create")
     end
