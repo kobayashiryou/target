@@ -5,4 +5,5 @@ class Company < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :departments, dependent: :destroy
   has_many :company_targets, dependent: :destroy
+  validates :companyname, uniqueness: { case_sensitive: true }, presence: true
 end

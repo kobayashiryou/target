@@ -6,4 +6,5 @@ class Department < ApplicationRecord
   has_many :users
   has_many :todo_targets, dependent: :destroy
   belongs_to :company
+  validates :departmentname, uniqueness: { case_sensitive: true }, presence: true
 end
