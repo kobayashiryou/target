@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :todos, dependent: :destroy
   belongs_to :department
+  validates :username, uniqueness: { case_sensitive: true }, presence: true
 end
