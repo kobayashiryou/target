@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(version: 2021_07_21_053029) do
 
   create_table "companies", charset: "utf8", force: :cascade do |t|
+    t.string "companyname", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -43,6 +44,7 @@ ActiveRecord::Schema.define(version: 2021_07_21_053029) do
   end
 
   create_table "departments", charset: "utf8", force: :cascade do |t|
+    t.string "departmentname", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -75,6 +77,7 @@ ActiveRecord::Schema.define(version: 2021_07_21_053029) do
   end
 
   create_table "users", charset: "utf8", force: :cascade do |t|
+    t.string "username", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
