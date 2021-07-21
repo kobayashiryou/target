@@ -1,4 +1,4 @@
-class CompanyTargetsController < ApplicationController
+class Api::V1::CompanyTargetsController < ApplicationController
   before_action :set_company_target, only: %i[show edit update destroy]
 
   # GET /company_targets or /company_targets.json

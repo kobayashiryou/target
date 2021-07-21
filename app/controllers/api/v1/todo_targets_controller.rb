@@ -1,4 +1,4 @@
-class TodoTargetsController < ApplicationController
+class Api::V1::TodoTargetsController < ApplicationController
   before_action :set_todo_target, only: %i[show edit update destroy]
 
   # GET /todo_targets or /todo_targets.json

@@ -1,4 +1,4 @@
-class DepartmentTargetsController < ApplicationController
+class Api::V1::DepartmentTargetsController < ApplicationController
   before_action :set_department_target, only: %i[show edit update destroy]
 
   # GET /department_targets or /department_targets.json
