@@ -4,6 +4,7 @@ class DeviseCreateDepartments < ActiveRecord::Migration[6.1]
   def change
     create_table :departments do |t|
       ## Database authenticatable
+      t.string :departmentname,     null: false, default: ""
       t.string :email,              null: false, default: ""
       t.string :encrypted_password, null: false, default: ""
 
