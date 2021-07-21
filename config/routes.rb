@@ -11,7 +11,7 @@ Rails.application.routes.draw do
         sessions: "api/v1/departments/sessions",
         registrations: "api/v1/departments/registrations",
       }
-      devise_for :users,  controllers: {
+      devise_for :users, controllers: {
         sessions: "api/v1/users/sessions",
         registrations: "api/v1/users/registrations",
       }
@@ -21,8 +21,6 @@ Rails.application.routes.draw do
       resources :todos
     end
   end
-
-
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
