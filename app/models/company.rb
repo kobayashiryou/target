@@ -1,10 +1,6 @@
-# frozen_string_literal: true
-
-class Company < ActiveRecord::Base
+class Company < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  include DeviseTokenAuth::Concerns::User
-  has_many :department, dependent: :destroy
 end
