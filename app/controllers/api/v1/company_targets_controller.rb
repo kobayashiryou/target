@@ -1,6 +1,6 @@
 class Api::V1::CompanyTargetsController < ApplicationController
   before_action :set_company_target, only: %i[show edit update destroy]
-
+  before_action :authenticate_company!, only: %i[new create edit update destroy]
   # GET /company_targets or /company_targets.json
   def index
     @company_targets = CompanyTarget.all
@@ -12,7 +12,7 @@ class Api::V1::CompanyTargetsController < ApplicationController
 
   # GET /company_targets/new
   def new
-    @company_target = CompanyTarget.new
+    @company_target = current_company.company_targets.new
   end
 
   # GET /company_targets/1/edit
@@ -21,11 +21,11 @@ class Api::V1::CompanyTargetsController < ApplicationController
 
   # POST /company_targets or /company_targets.json
   def create
-    @company_target = CompanyTarget.new(company_target_params)
+    @company_target = current_company.company_targets.new(company_target_params)
 
     respond_to do |format|
       if @company_target.save
-        format.html { redirect_to @company_target, notice: "Company target was successfully created." }
+        format.html { redirect_to [:api, :v1, @company_target], notice: "Company target was successfully created." }
         format.json { render :show, status: :created, location: @company_target }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +38,7 @@ class Api::V1::CompanyTargetsController < ApplicationController
   def update
     respond_to do |format|
       if @company_target.update(company_target_params)
-        format.html { redirect_to @company_target, notice: "Company target was successfully updated." }
+        format.html { redirect_to [:api, :v1, @company_target], notice: "Company target was successfully updated." }
         format.json { render :show, status: :ok, location: @company_target }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -51,7 +51,7 @@ class Api::V1::CompanyTargetsController < ApplicationController
   def destroy
     @company_target.destroy
     respond_to do |format|
-      format.html { redirect_to company_targets_url, notice: "Company target was successfully destroyed." }
+      format.html { redirect_to api_v1_company_targets_url, notice: "Company target was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -60,11 +60,11 @@ class Api::V1::CompanyTargetsController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_company_target
-      @company_target = CompanyTarget.find(params[:id])
+      @company_target = current_company.company_targets.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def company_target_params
-      params.require(:company_target).permit(:monthly_target, :anually_target, :company_id)
+      params.require(:company_target).permit(:monthly_target, :anually_target)
     end
 end
