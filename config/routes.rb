@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  devise_for :companies
-  devise_for :departments
   namespace :api do
     namespace :v1 do
       devise_for :companies, controllers: {
@@ -21,6 +19,8 @@ Rails.application.routes.draw do
       resources :todos
     end
   end
+
+  root to: 'application#home'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
