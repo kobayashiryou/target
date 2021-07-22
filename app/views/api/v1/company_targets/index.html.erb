@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Company Targets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Monthly target</th>
+      <th>Anually target</th>
+      <th>Company</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @company_targets.each do |company_target| %>
+      <tr>
+        <td><%= company_target.monthly_target %></td>
+        <td><%= company_target.anually_target %></td>
+        <td><%= company_target.company_id %></td>
+        <td><%= link_to '詳細', [:api, :v1, company_target] %></td>
+        <td><%= link_to '編集', edit_api_v1_company_target_path(company_target) %></td>
+        <td><%= link_to '削除', api_v1_company_target_path(company_target), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '新規作成', new_api_v1_company_target_path %>
+<div>
+  <%= link_to 'ログアウト',  destroy_api_v1_company_session_path, :method => 'delete', class: 'btn btn-danger m-5' %>
+</div>
