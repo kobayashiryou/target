@@ -1,4 +1,4 @@
-<%= form_with(model: company_target) do |form| %>
+<%= form_with model: [:api, :v1,@company_target] do |form| %>
   <% if company_target.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(company_target.errors.count, "error") %> prohibited this company_target from being saved:</h2>

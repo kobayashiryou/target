@@ -1,5 +1,6 @@
 class Api::V1::DepartmentTargetsController < ApplicationController
   before_action :set_department_target, only: %i[show edit update destroy]
+  before_action :authenticate_department!, only: %i[new create edit update destroy]
 
   # GET /department_targets or /department_targets.json
   def index
@@ -12,7 +13,7 @@ class Api::V1::DepartmentTargetsController < ApplicationController
 
   # GET /department_targets/new
   def new
-    @department_target = DepartmentTarget.new
+    @department_target = current_department.department_targets.new
   end
 
   # GET /department_targets/1/edit
@@ -21,11 +22,11 @@ class Api::V1::DepartmentTargetsController < ApplicationController
 
   # POST /department_targets or /department_targets.json
   def create
-    @department_target = DepartmentTarget.new(department_target_params)
+    @department_target = current_department.department_targets.new(department_target_params)
 
     respond_to do |format|
       if @department_target.save
-        format.html { redirect_to @department_target, notice: "Department target was successfully created." }
+        format.html { redirect_to [:api, :v1, @company_target], notice: "Department target was successfully created." }
         format.json { render :show, status: :created, location: @department_target }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +39,7 @@ class Api::V1::DepartmentTargetsController < ApplicationController
   def update
     respond_to do |format|
       if @department_target.update(department_target_params)
-        format.html { redirect_to @department_target, notice: "Department target was successfully updated." }
+        format.html { redirect_to api_v1_department_url, notice: "Department target was successfully updated." }
         format.json { render :show, status: :ok, location: @department_target }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -60,7 +61,7 @@ class Api::V1::DepartmentTargetsController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_department_target
-      @department_target = DepartmentTarget.find(params[:id])
+      @department_target = current_department.department_targets.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

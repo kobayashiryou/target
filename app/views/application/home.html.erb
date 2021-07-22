@@ -1,0 +1,48 @@
+<section class="text-center m-5">
+    <h1 class="text-center" >Welcome To Basic Rails 6 Auth</h1>
+    <p>Rails 6 auth using devise</p>
+    <% if current_api_v1_user %>
+        <h5><%= current_api_v1_user.email %></h5>
+    <%end%>
+
+    <% if current_api_v1_department %>
+      <h5><%= current_api_v1_department.email %></h5>
+    <%end%>
+
+    <% if current_company %>
+      <h5><%= current_api_v1_company.email %></h5>
+    <%end%>
+
+    <%=
+        link_to_if(current_api_v1_user.nil?, "UserLogin", new_api_v1_user_session_path, class: 'btn btn-primary m-5') do
+            link_to('User Sign out',  destroy_api_v1_user_session_path, :method => 'delete', class: 'btn btn-danger m-5')
+        end
+    %>
+
+    <%=
+        link_to_if(current_api_v1_department.nil?, "DepartmentLogin", new_api_v1_department_session_path, class: 'btn btn-primary m-5') do
+            link_to('Department Sign out',  destroy_api_v1_department_session_path, :method => 'delete', class: 'btn btn-danger m-5')
+        end
+    %>
+
+    <%=
+        link_to_if(current_company.nil?, "CompanyLogin", new_api_v1_company_session_path, class: 'btn btn-primary m-5') do
+            link_to('Company Sign out',  destroy_api_v1_company_session_path, :method => 'delete', class: 'btn btn-danger m-5')
+        end
+    %>
+
+    <div>
+      <%=
+          link_to("User新規登録", new_api_v1_user_registration_path)
+      %>
+
+      <%=
+          link_to("Department新規登録", new_api_v1_department_registration_path)
+      %>
+
+      <%=
+          link_to("Company新規登録", new_api_v1_department_registration_path)
+      %>
+    </div>
+
+</section>

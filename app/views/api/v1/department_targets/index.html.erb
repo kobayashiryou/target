@@ -18,9 +18,9 @@
         <td><%= department_target.monthly_target %></td>
         <td><%= department_target.anually_target %></td>
         <td><%= department_target.department_id %></td>
-        <td><%= link_to 'Show', department_target %></td>
-        <td><%= link_to 'Edit', edit_department_target_path(department_target) %></td>
-        <td><%= link_to 'Destroy', department_target, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', [:api, :v1, department_target] %></td>
+        <td><%= link_to 'Edit', edit_api_v1_department_target_path(department_target) %></td>
+        <td><%= link_to 'Destroy', api_v1_department_target_path(department_target), method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New Department Target', new_department_target_path %>
+<%= link_to 'New Department Target', new_api_v1_department_target_path %>
