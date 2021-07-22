@@ -6,7 +6,8 @@ class ApplicationController < ActionController::Base
   alias_method :current_user, :current_api_v1_user
   alias_method :authenticate_user!, :authenticate_api_v1_user!
 
-  def home; end
+  def home
+  end
 
   def after_sign_in_path_for(resource)
     if current_company
