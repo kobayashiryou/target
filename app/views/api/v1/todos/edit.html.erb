@@ -2,5 +2,5 @@
 
 <%= render 'form', todo: @todo %>
 
-<%= link_to 'Show', @todo %> |
-<%= link_to 'Back', todos_path %>
+<%= link_to '詳細', [:api, :v1, @todo] %> |
+<%= link_to 'ホーム', api_v1_todos_path %>

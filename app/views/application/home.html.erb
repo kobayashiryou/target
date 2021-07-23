@@ -9,7 +9,7 @@
       <h5><%= current_api_v1_department.email %></h5>
     <%end%>
 
-    <% if current_company %>
+    <% if current_api_v1_company %>
       <h5><%= current_api_v1_company.email %></h5>
     <%end%>
 
@@ -26,7 +26,7 @@
     %>
 
     <%=
-        link_to_if(current_company.nil?, "CompanyLogin", new_api_v1_company_session_path, class: 'btn btn-primary m-5') do
+        link_to_if(current_api_v1_company.nil?, "CompanyLogin", new_api_v1_company_session_path, class: 'btn btn-primary m-5') do
             link_to('Company Sign out',  destroy_api_v1_company_session_path, :method => 'delete', class: 'btn btn-danger m-5')
         end
     %>
@@ -41,7 +41,7 @@
       %>
 
       <%=
-          link_to("Company新規登録", new_api_v1_department_registration_path)
+          link_to("Company新規登録", new_api_v1_company_registration_path)
       %>
     </div>
 
