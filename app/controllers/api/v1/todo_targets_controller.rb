@@ -15,11 +15,11 @@ class Api::V1::TodoTargetsController < ApplicationController
 
   # GET /todo_targets/1 or /todo_targets/1.json
   def show
-    if current_department
-      @todo_target = current_department.todo_targets.find(params[:id])
-    else
-      @todo_target = TodoTarget.find(params[:id])
-    end
+    @todo_target = if current_department
+                     current_department.todo_targets.find(params[:id])
+                   else
+                     TodoTarget.find(params[:id])
+                   end
   end
 
   # GET /todo_targets/new
