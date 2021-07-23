@@ -1,18 +1,30 @@
 class Api::V1::TodoTargetsController < ApplicationController
-  before_action :set_todo_target, only: %i[show edit update destroy]
+  before_action :set_todo_target, only: %i[edit update destroy]
+  before_action :authenticate_department!, only: %i[new create edit update destroy]
 
   # GET /todo_targets or /todo_targets.json
   def index
-    @todo_targets = TodoTarget.all
+    if current_department
+      @todo_targets = TodoTarget.where(department_id: current_department.id)
+    elsif current_user
+      @todo_targets = TodoTarget.where(id: current_user.department_id)
+    elsif current_company
+      @todo_targets = TodoTarget.all
+    end
   end
 
   # GET /todo_targets/1 or /todo_targets/1.json
   def show
+    @todo_target = if current_department
+                     current_department.todo_targets.find(params[:id])
+                   else
+                     TodoTarget.find(params[:id])
+                   end
   end
 
   # GET /todo_targets/new
   def new
-    @todo_target = TodoTarget.new
+    @todo_target = current_department.todo_targets.new
   end
 
   # GET /todo_targets/1/edit
@@ -21,11 +33,11 @@ class Api::V1::TodoTargetsController < ApplicationController
 
   # POST /todo_targets or /todo_targets.json
   def create
-    @todo_target = TodoTarget.new(todo_target_params)
+    @todo_target = current_department.todo_targets.new(todo_target_params)
 
     respond_to do |format|
       if @todo_target.save
-        format.html { redirect_to @todo_target, notice: "Todo target was successfully created." }
+        format.html { redirect_to [:api, :v1, @todo_target], notice: "Todo target was successfully created." }
         format.json { render :show, status: :created, location: @todo_target }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -38,7 +50,7 @@ class Api::V1::TodoTargetsController < ApplicationController
   def update
     respond_to do |format|
       if @todo_target.update(todo_target_params)
-        format.html { redirect_to @todo_target, notice: "Todo target was successfully updated." }
+        format.html { redirect_to [:api, :v1, @todo_target], notice: "Todo target was successfully updated." }
         format.json { render :show, status: :ok, location: @todo_target }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -51,7 +63,7 @@ class Api::V1::TodoTargetsController < ApplicationController
   def destroy
     @todo_target.destroy
     respond_to do |format|
-      format.html { redirect_to todo_targets_url, notice: "Todo target was successfully destroyed." }
+      format.html { redirect_to api_v1_todo_targets_url, notice: "Todo target was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -60,7 +72,7 @@ class Api::V1::TodoTargetsController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_todo_target
-      @todo_target = TodoTarget.find(params[:id])
+      @todo_target = current_department.todo_targets.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

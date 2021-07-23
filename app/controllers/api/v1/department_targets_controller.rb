@@ -4,7 +4,13 @@ class Api::V1::DepartmentTargetsController < ApplicationController
 
   # GET /department_targets or /department_targets.json
   def index
-    @department_targets = DepartmentTarget.all
+    if current_department
+      @department_targets = DepartmentTarget.where(department_id: current_department.id)
+    elsif current_user
+      @department_targets = DepartmentTarget.where(department_id: current_user.department_id)
+    elsif current_company
+      @department_targets = DepartmentTarget.all
+    end
   end
 
   # GET /department_targets/1 or /department_targets/1.json
@@ -39,7 +45,7 @@ class Api::V1::DepartmentTargetsController < ApplicationController
   def update
     respond_to do |format|
       if @department_target.update(department_target_params)
-        format.html { redirect_to api_v1_department_url, notice: "Department target was successfully updated." }
+        format.html { redirect_to [:api, :v1, @department_target], notice: "Department target was successfully updated." }
         format.json { render :show, status: :ok, location: @department_target }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -52,7 +58,7 @@ class Api::V1::DepartmentTargetsController < ApplicationController
   def destroy
     @department_target.destroy
     respond_to do |format|
-      format.html { redirect_to department_targets_url, notice: "Department target was successfully destroyed." }
+      format.html { redirect_to api_v1_department_targets_url, notice: "Department target was successfully destroyed." }
       format.json { head :no_content }
     end
   end
@@ -66,6 +72,6 @@ class Api::V1::DepartmentTargetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def department_target_params
-      params.require(:department_target).permit(:monthly_target, :anually_target, :department_id)
+      params.require(:department_target).permit(:monthly_target, :anually_target)
     end
 end

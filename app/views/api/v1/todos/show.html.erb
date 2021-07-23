@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @todo.body %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @todo.user_id %>
+</p>
+
+<p>
+  <strong>ToDoTarget:</strong>
+  <%= link_to 'TodoTargetを確認',  api_v1_todo_target_path(@todo.todo_target_id) %>
+</p>
+
+<%if current_api_v1_user%>
+  <%= link_to '編集', edit_api_v1_todo_path(@todo) %> |
+  <%= link_to 'ホーム', api_v1_todos_path %>
+<%end%>

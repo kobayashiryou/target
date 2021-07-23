@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Todo Targets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Body</th>
+      <th>Department</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @todo_targets.each do |todo_target| %>
+      <tr>
+        <td><%= todo_target.body %></td>
+        <td><%= todo_target.department_id %></td>
+        <td><%= link_to '詳細', [:api, :v1, todo_target] %></td>
+        <%if current_api_v1_department%>
+          <td><%= link_to '編集', edit_api_v1_todo_target_path(todo_target) %></td>
+          <td><%= link_to '削除', api_v1_todo_target_path(todo_target), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%end%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<div>
+  <%= link_to 'CompanyTargetへ！',  api_v1_company_targets_path %>
+</div>
+
+<div>
+  <%= link_to 'DepartmentTarget', api_v1_department_targets_path %>
+</div>
+
+<%= link_to '新規作成', new_api_v1_todo_target_path %>
+
+<div>
+  <%= link_to 'ログアウト',  destroy_api_v1_department_session_path, :method => 'delete', class: 'btn btn-danger m-5' %>
+</div>

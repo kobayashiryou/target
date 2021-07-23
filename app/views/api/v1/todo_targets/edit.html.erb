@@ -1,0 +1,6 @@
+<h1>Editing Todo Target</h1>
+
+<%= render 'form', todo_target: @todo_target %>
+
+<%= link_to '詳細', [:api, :v1, @todo_target] %> |
+<%= link_to 'ホーム', api_v1_todo_targets_path %>

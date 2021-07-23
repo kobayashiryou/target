@@ -1,0 +1,6 @@
+<h1>Editing Todo</h1>
+
+<%= render 'form', todo: @todo %>
+
+<%= link_to '詳細', [:api, :v1, @todo] %> |
+<%= link_to 'ホーム', api_v1_todos_path %>
