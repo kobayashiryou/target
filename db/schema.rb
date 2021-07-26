@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_21_053029) do
+ActiveRecord::Schema.define(version: 2021_07_26_123705) do
 
   create_table "companies", charset: "utf8", force: :cascade do |t|
     t.string "companyname", default: "", null: false
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2021_07_21_053029) do
     t.bigint "company_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "month"
     t.index ["company_id"], name: "index_company_targets_on_company_id"
   end
 
@@ -40,6 +41,7 @@ ActiveRecord::Schema.define(version: 2021_07_21_053029) do
     t.bigint "department_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "month"
     t.index ["department_id"], name: "index_department_targets_on_department_id"
   end
 
