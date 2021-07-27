@@ -1,10 +1,13 @@
 class ApplicationController < ActionController::Base
   alias_method :current_company, :current_api_v1_company
   alias_method :authenticate_company!, :authenticate_api_v1_company!
+  alias_method :company_signed_in?, :api_v1_company_signed_in?
   alias_method :current_department, :current_api_v1_department
   alias_method :authenticate_department!, :authenticate_api_v1_department!
+  alias_method :department_signed_in?, :api_v1_department_signed_in?
   alias_method :current_user, :current_api_v1_user
   alias_method :authenticate_user!, :authenticate_api_v1_user!
+  alias_method :user_signed_in?, :api_v1_user_signed_in?
 
   def home
   end
