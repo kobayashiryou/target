@@ -80,9 +80,10 @@ class Api::V1::TodoTargetsController < ApplicationController
     def todo_target_params
       params.require(:todo_target).permit(:body, :department_id)
     end
+
     def move_to_signed_in
       unless company_signed_in? || department_signed_in? || user_signed_in?
-        #サインインしていないユーザーはログインページが表示される
+        # サインインしていないユーザーはログインページが表示される
         redirect_to api_v1_department_session_url
       end
     end

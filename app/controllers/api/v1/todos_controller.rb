@@ -4,11 +4,11 @@ class Api::V1::TodosController < ApplicationController
 
   # GET /todos or /todos.json
   def index
-    if current_user
-      @todos = Todo.where(user_id: current_user.id)
-    else
-      @todos = Todo.all
-    end
+    @todos = if current_user
+               Todo.where(user_id: current_user.id)
+             else
+               Todo.all
+             end
   end
 
   # GET /todos/1 or /todos/1.json
@@ -72,9 +72,10 @@ class Api::V1::TodosController < ApplicationController
     def todo_params
       params.require(:todo).permit(:body, :todo_target_id)
     end
+
     def move_to_signed_in
       unless company_signed_in? || department_signed_in? || user_signed_in?
-        #サインインしていないユーザーはログインページが表示される
+        # サインインしていないユーザーはログインページが表示される
         redirect_to api_v1_user_session_url
       end
     end

@@ -71,7 +71,7 @@ class Api::V1::CompanyTargetsController < ApplicationController
 
     def move_to_signed_in
       unless company_signed_in? || department_signed_in? || user_signed_in?
-        #サインインしていないユーザーはログインページが表示される
+        # サインインしていないユーザーはログインページが表示される
         redirect_to api_v1_company_session_url
       end
     end

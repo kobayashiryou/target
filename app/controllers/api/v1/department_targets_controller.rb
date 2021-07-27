@@ -75,9 +75,10 @@ class Api::V1::DepartmentTargetsController < ApplicationController
     def department_target_params
       params.require(:department_target).permit(:monthly_target, :anually_target, :month)
     end
+
     def move_to_signed_in
       unless company_signed_in? || department_signed_in? || user_signed_in?
-        #サインインしていないユーザーはログインページが表示される
+        # サインインしていないユーザーはログインページが表示される
         redirect_to api_v1_department_session_url
       end
     end
