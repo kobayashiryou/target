@@ -1,27 +1,29 @@
-<%= form_with model: [:api, :v1, @todo_target] do |form| %>
-  <% if todo_target.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(todo_target.errors.count, "error") %> prohibited this todo_target from being saved:</h2>
+<section class="text-center m-5">
+  <%= form_with model: [:api, :v1, @todo_target] do |form| %>
+    <% if todo_target.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(todo_target.errors.count, "error") %> prohibited this todo_target from being saved:</h2>
 
-      <ul>
-        <% todo_target.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :body %>
-    <%= form.text_field :body %>
-  </div>
+        <ul>
+          <% todo_target.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
     <div class="field">
-    <%= form.label :department_id %>
-    <%= form.collection_select :department_id, Department.all, :id, :departmentname, :prompt => "部署を選択" %>
-  </div>
+      <%= form.label :案件内容 %>
+      <%= form.text_field :body %>
+    </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+    <div class="field">
+      <%= form.label :部署 %>
+      <%= form.collection_select :department_id, Department.all, :id, :departmentname, :prompt => "部署を選択" %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
+    </div>
+  <% end %>
+</section>
