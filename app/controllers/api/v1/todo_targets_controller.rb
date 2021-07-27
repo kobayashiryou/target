@@ -1,4 +1,5 @@
 class Api::V1::TodoTargetsController < ApplicationController
+  before_action :move_to_signed_in
   before_action :set_todo_target, only: %i[edit update destroy]
   before_action :authenticate_department!, only: %i[new create edit update destroy]
 
@@ -78,5 +79,11 @@ class Api::V1::TodoTargetsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def todo_target_params
       params.require(:todo_target).permit(:body, :department_id)
+    end
+    def move_to_signed_in
+      unless company_signed_in? || department_signed_in? || user_signed_in?
+        #サインインしていないユーザーはログインページが表示される
+        redirect_to api_v1_department_session_url
+      end
     end
 end

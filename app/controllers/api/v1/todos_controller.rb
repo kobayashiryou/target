@@ -1,4 +1,5 @@
 class Api::V1::TodosController < ApplicationController
+  before_action :move_to_signed_in
   before_action :set_todo, only: %i[show edit update destroy]
 
   # GET /todos or /todos.json
@@ -6,7 +7,7 @@ class Api::V1::TodosController < ApplicationController
     if current_user
       @todos = Todo.where(user_id: current_user.id)
     else
-      @todo = Todo.all
+      @todos = Todo.all
     end
   end
 
@@ -70,5 +71,11 @@ class Api::V1::TodosController < ApplicationController
     # Only allow a list of trusted parameters through.
     def todo_params
       params.require(:todo).permit(:body, :todo_target_id)
+    end
+    def move_to_signed_in
+      unless company_signed_in? || department_signed_in? || user_signed_in?
+        #サインインしていないユーザーはログインページが表示される
+        redirect_to api_v1_user_session_url
+      end
     end
 end

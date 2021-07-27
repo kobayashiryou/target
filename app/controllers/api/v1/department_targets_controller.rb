@@ -1,4 +1,5 @@
 class Api::V1::DepartmentTargetsController < ApplicationController
+  before_action :move_to_signed_in
   before_action :set_department_target, only: %i[show edit update destroy]
   before_action :authenticate_department!, only: %i[new create edit update destroy]
 
@@ -32,7 +33,7 @@ class Api::V1::DepartmentTargetsController < ApplicationController
 
     respond_to do |format|
       if @department_target.save
-        format.html { redirect_to [:api, :v1, @company_target], notice: "Department target was successfully created." }
+        format.html { redirect_to [:api, :v1, @department_target], notice: "Department target was successfully created." }
         format.json { render :show, status: :created, location: @department_target }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -72,6 +73,12 @@ class Api::V1::DepartmentTargetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def department_target_params
-      params.require(:department_target).permit(:monthly_target, :anually_target)
+      params.require(:department_target).permit(:monthly_target, :anually_target, :month)
+    end
+    def move_to_signed_in
+      unless company_signed_in? || department_signed_in? || user_signed_in?
+        #サインインしていないユーザーはログインページが表示される
+        redirect_to api_v1_department_session_url
+      end
     end
 end
