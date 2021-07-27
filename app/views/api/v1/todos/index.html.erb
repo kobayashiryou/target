@@ -1,42 +1,70 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Todos</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Body</th>
-      <th>User</th>
-      <th colspan="2"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @todos.each do |todo| %>
-      <tr>
-        <td><%= todo.body %></td>
-        <td><%= todo.user_id %></td>
-        <td><%= link_to 'ToDoTarget', api_v1_todo_target_path(todo.todo_target_id) %></td>
-        <td><%= link_to '詳細', [:api, :v1, todo] %></td>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">Target</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
         <%if current_api_v1_user%>
-          <td><%= link_to '編集', edit_api_v1_todo_path(todo) %></td>
-          <td><%= link_to '削除', api_v1_todo_path(todo), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <li class="nav-item">
+            <%= link_to "新規作成", new_api_v1_todo_path, class: "nav-link" %>
+          </li>
         <%end%>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            メニュー
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
+            <li><%= link_to "CompanyTarget", api_v1_company_targets_path, class: "flex-sm-fill text-sm-center nav-link" %></li>
+            <li><%= link_to "DepartmentTarget", api_v1_department_targets_path, class: "flex-sm-fill text-sm-center nav-link" %></li>
+            <li><%= link_to "TodoTarget", api_v1_todo_targets_path, class: "flex-sm-fill text-sm-center nav-link" %></li>
+          </ul>
+        </li>
+        <% if current_api_v1_user %>
+          <li class="nav-item">
+            <%= link_to "ログアウト", destroy_api_v1_user_session_path, :method => 'delete', class: "flex-sm-fill text-sm-center nav-link" %>
+          </li>
+        <%end%>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="p-5 text-center mb-2 bg-light text-black">
+  <section class="text-center m-5">
+    <p id="notice"><%= notice %></p>
 
-<br>
+    <h1>Todo</h1>
 
-<div>
-  <%= link_to 'CompanyTargetへ！',  api_v1_company_targets_path %>
+    <table class="table table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th scope="col">名前</th>
+          <th scope="col">部署</th>
+          <th scope="col">内容</th>
+          <th scope="col"></th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @todos.each do |todo| %>
+          <tr class=>
+            <td><%= User.find(todo.user_id).username %></td>
+            <td><%=
+                    user = User.find(todo.user_id)
+                    Department.find(user.department_id).departmentname
+                %>
+            </td>
+            <%if current_api_v1_user%>
+              <td><%= link_to todo.body, [:api, :v1, todo], class: "link-dark" %></td>
+            <%else%>
+              <td><%= todo.body %></td>
+            <%end%>
+            <td></td>
+            <td><%= TodoTarget.find(todo.todo_target_id).body %></td>
+          </tr>
+        <%end%>
+      </tbody>
+    </table>
+  </section>
 </div>
-
-<div>
-  <%= link_to 'DepartmentTarget', api_v1_department_targets_path %>
-</div>
-
-<%= link_to '新規作成', new_api_v1_todo_path %>
-
-<%= link_to 'ホーム', api_v1_todos_path %>

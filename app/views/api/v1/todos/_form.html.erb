@@ -1,27 +1,29 @@
-<%= form_with model: [:api, :v1, @todo] do |form| %>
-  <% if todo.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(todo.errors.count, "error") %> prohibited this todo from being saved:</h2>
+<section class="text-center m-5">
+  <%= form_with model: [:api, :v1, @todo] do |form| %>
+    <% if todo.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(todo.errors.count, "error") %> prohibited this todo from being saved:</h2>
 
-      <ul>
-        <% todo.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% todo.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :内容 %>
+      <%= form.text_field :body %>
+    </div>
+
+    <div class="field">
+      <%= form.label :案件 %>
+      <%= form.collection_select :todo_target_id, TodoTarget.where(department_id: current_api_v1_user.department_id), :id, :body, :prompt => "TodoTargetを選択" %>
+    </div>
+
+    <div class="actions">
+      <%= form.submit %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :body %>
-    <%= form.text_field :body %>
-  </div>
-
-  <div class="field">
-    <%= form.label :todo_target_id %>
-    <%= form.collection_select :todo_target_id, TodoTarget.where(department_id: current_api_v1_user.department_id), :id, :body, :prompt => "TodoTargetを選択" %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</section>
