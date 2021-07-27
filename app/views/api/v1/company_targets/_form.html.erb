@@ -1,28 +1,35 @@
-<%= form_with model: [:api, :v1,@company_target] do |form| %>
-  <% if company_target.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(company_target.errors.count, "error") %> prohibited this company_target from being saved:</h2>
+<section class="text-center m-5">
+  <%= form_with model: [:api, :v1,@company_target] do |form| %>
+    <% if company_target.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(company_target.errors.count, "error") %> prohibited this company_target from being saved:</h2>
 
-      <ul>
-        <% company_target.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+        <ul>
+          <% company_target.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div class="field">
+      <%= form.label :月%>
+      <%= form.select :month, 1..12 %>
+    </div>
+
+    <div class="field">
+      <%= form.label :月間目標 %>
+      <%= form.text_field :monthly_target %>
+    </div>
+
+    <div class="field">
+      <%= form.label :年間目標 %>
+      <%= form.text_field :anually_target %>
+    </div>
+
+
+    <div class="actions">
+      <%= form.submit %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :monthly_target %>
-    <%= form.text_field :monthly_target %>
-  </div>
-
-  <div class="field">
-    <%= form.label :anually_target %>
-    <%= form.text_field :anually_target %>
-  </div>
-
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>
+</section>
