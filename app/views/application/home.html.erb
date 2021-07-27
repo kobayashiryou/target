@@ -1,48 +1,110 @@
-<section class="text-center m-5">
-    <h1 class="text-center" >Welcome To Basic Rails 6 Auth</h1>
-    <p>Rails 6 auth using devise</p>
-    <% if current_api_v1_user %>
-        <h5><%= current_api_v1_user.email %></h5>
-    <%end%>
-
-    <% if current_api_v1_department %>
-      <h5><%= current_api_v1_department.email %></h5>
-    <%end%>
-
-    <% if current_api_v1_company %>
-      <h5><%= current_api_v1_company.email %></h5>
-    <%end%>
-
-    <%=
-        link_to_if(current_api_v1_user.nil?, "UserLogin", new_api_v1_user_session_path, class: 'btn btn-primary m-5') do
-            link_to('User Sign out',  destroy_api_v1_user_session_path, :method => 'delete', class: 'btn btn-danger m-5')
-        end
-    %>
-
-    <%=
-        link_to_if(current_api_v1_department.nil?, "DepartmentLogin", new_api_v1_department_session_path, class: 'btn btn-primary m-5') do
-            link_to('Department Sign out',  destroy_api_v1_department_session_path, :method => 'delete', class: 'btn btn-danger m-5')
-        end
-    %>
-
-    <%=
-        link_to_if(current_api_v1_company.nil?, "CompanyLogin", new_api_v1_company_session_path, class: 'btn btn-primary m-5') do
-            link_to('Company Sign out',  destroy_api_v1_company_session_path, :method => 'delete', class: 'btn btn-danger m-5')
-        end
-    %>
-
-    <div>
-      <%=
-          link_to("User新規登録", new_api_v1_user_registration_path)
-      %>
-
-      <%=
-          link_to("Department新規登録", new_api_v1_department_registration_path)
-      %>
-
-      <%=
-          link_to("Company新規登録", new_api_v1_company_registration_path)
-      %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Target</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            ログイン
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDropdownMenuLink">
+            <li>  <%=
+                    link_to_if(current_api_v1_user.nil?, "UserLogin", new_api_v1_user_session_path, class: "flex-sm-fill text-sm-center nav-link") do
+                      link_to('User Sign out',  destroy_api_v1_user_session_path, :method => 'delete', class: "flex-sm-fill text-sm-center nav-link")
+                    end
+                  %>
+            </li>
+            <li>  <%=
+                    link_to_if(current_api_v1_department.nil?, "DepartmentLogin", new_api_v1_department_session_path, class: "flex-sm-fill text-sm-center nav-link") do
+                      link_to('Department Sign out',  destroy_api_v1_department_session_path, :method => 'delete', class: "flex-sm-fill text-sm-center nav-link")
+                    end
+                  %>
+            </li>
+            <li>  <%=
+                    link_to_if(current_api_v1_company.nil?, "CompanyLogin", new_api_v1_company_session_path, class: "flex-sm-fill text-sm-center nav-link") do
+                      link_to('Company Sign out',  destroy_api_v1_company_session_path, :method => 'delete', class: "flex-sm-fill text-sm-center nav-link")
+                    end
+                  %>
+            </li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <%= link_to "CompanyTarget", api_v1_company_targets_path, class: "flex-sm-fill text-sm-center nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "DepartmentTarget", api_v1_department_targets_path, class: "flex-sm-fill text-sm-center nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "TodoTarget", api_v1_todo_targets_path, class: "flex-sm-fill text-sm-center nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Todo", api_v1_todos_path, class: "flex-sm-fill text-sm-center nav-link" %>
+        </li>
+      </ul>
     </div>
+  </div>
+</nav>
 
-</section>
+<div class="p-5 text-center mb-2 bg-light text-black">
+  <section class="text-center m-5">
+    <h1 class="text-center" >Welcome to Target!</h1>
+    <p>Targetは現在抱えているtodoがどの案件（todo-target）とリンクしているのかを明確にします</p>
+    <p>また部署の目標、会社の目標も確認でき、さらに目標達成までの進捗状況をtodoやtodo-targetの完了度合いにより確認することができます。</p>
+    <p>まずは会社、部署の新規登録をしましょう</p>
+    <div class="dropdown">
+      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+        新規登録
+      </a>
+
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <li><button class="dropdown-item" type="button"><%=link_to("User新規登録", new_api_v1_user_registration_path, class: "link-dark")%></button></li>
+        <li><button class="dropdown-item" type="button"><%=link_to("Department新規登録", new_api_v1_department_registration_path, class: "link-dark")%></button></li>
+        <li><button class="dropdown-item" type="button"><%=link_to("Company新規登録", new_api_v1_company_registration_path, class: "link-dark")%></button></li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<footer class="bg-dark text-center text-lg-start text-white">
+  <div class="container p-4">
+    <div class="row">
+      <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+        <h5 class="text-uppercase">製作者</h5>
+
+        <p>
+          小林　凌（こばやし　りょう） ２８歳
+        </p>
+        <p>
+          使用言語：Ruby,Ruby on Rails,docker,git,GitHub,HTML,CSS
+        </p>
+        <p>
+          プログラミング学習開始：２０２０年１２月末から現在まで
+        </p>
+        <p>
+          希望職種：バックエンド
+        </p>
+      </div>
+      <div class="col-lg-6 col-md-12 mb-4 mb-md-0">
+        <h5 class="text-uppercase">本サービス開発の背景</h5>
+
+        <ul>
+          <li>
+            負担する業務量が多くなった時に、自分が抱えている仕事が部署のどの案件とリンクしているか明確になっていた方が仕事が捗りやすい。
+          </li>
+          <li>
+            部署が抱えている案件を把握できていれば、指示を待つことなく、できる範囲の仕事を積極的にできる。
+          </li>
+          <li>
+            目標が把握できれば、目標達成のためにどの位のペースで仕事すればいいか逆算しやすい。
+          </li>
+        <ul>
+      </div>
+    </div>
+  </div>
+  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
+    © 2021 小林　凌
+  </div>
+</footer>
