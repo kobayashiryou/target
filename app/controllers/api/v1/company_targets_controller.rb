@@ -1,4 +1,5 @@
 class Api::V1::CompanyTargetsController < ApplicationController
+  before_action :move_to_signed_in
   before_action :set_company_target, only: %i[show edit update destroy]
   before_action :authenticate_company!, only: %i[new create edit update destroy]
   # GET /company_targets or /company_targets.json
@@ -65,6 +66,13 @@ class Api::V1::CompanyTargetsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def company_target_params
-      params.require(:company_target).permit(:monthly_target, :anually_target)
+      params.require(:company_target).permit(:monthly_target, :anually_target, :month)
+    end
+
+    def move_to_signed_in
+      unless company_signed_in? || department_signed_in? || user_signed_in?
+        # サインインしていないユーザーはログインページが表示される
+        redirect_to api_v1_company_session_url
+      end
     end
 end
