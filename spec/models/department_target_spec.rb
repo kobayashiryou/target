@@ -5,7 +5,7 @@ RSpec.describe DepartmentTarget, type: :model do
     subject { department_target.valid? }
 
     let(:department_target) { build(:department_target, month: month, monthly_target: monthly_target, anually_target: anually_target) }
-    let(:month){ Faker::Date.between(from: 1, to: 12) }
+    let(:month) { Faker::Date.between(from: 1, to: 12) }
     let(:monthly_target) { Faker::Lorem.sentence }
     let(:anually_target) { Faker::Lorem.sentence }
     context "month,monthly_target,anually_targetが指定されている時" do
