@@ -4,10 +4,11 @@ RSpec.describe CompanyTarget, type: :model do
   describe "正常系テスト" do
     subject { company_target.valid? }
 
-    let(:company_target) { build(:company_target, monthly_target: monthly_target, anually_target: anually_target) }
+    let(:company_target) { build(:company_target, month: month, monthly_target: monthly_target, anually_target: anually_target) }
+    let(:month){ Faker::Date.between(from: 1, to: 12) }
     let(:monthly_target) { Faker::Lorem.sentence }
     let(:anually_target) { Faker::Lorem.sentence }
-    context "monthly_target,anually_targetが指定されている時" do
+    context "month,monthly_target,anually_targetが指定されている時" do
       it "monthly_target,anually_targetが作成される" do
         expect(subject).to eq true
       end
