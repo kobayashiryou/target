@@ -15,7 +15,7 @@ RSpec.describe Department, type: :model do
     end
 
     context "departmentnameがnilの時" do
-      let(:departmentname){ nil }
+      let(:departmentname) { nil }
       it "エラーする" do
         subject
         expect(department.errors.messages[:departmentname]).to include "can't be blank"

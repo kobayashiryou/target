@@ -15,7 +15,7 @@ RSpec.describe User, type: :model do
     end
 
     context "usernameがnilの時" do
-      let(:username){ nil }
+      let(:username) { nil }
       it "エラーする" do
         subject
         expect(user.errors.messages[:username]).to include "can't be blank"
