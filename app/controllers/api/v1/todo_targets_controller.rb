@@ -8,7 +8,7 @@ class Api::V1::TodoTargetsController < ApplicationController
     if current_department
       @todo_targets = TodoTarget.where(department_id: current_department.id)
     elsif current_user
-      @todo_targets = TodoTarget.where(id: current_user.department_id)
+      @todo_targets = TodoTarget.where(department_id: current_user.department_id)
     elsif current_company
       @todo_targets = TodoTarget.all
     end

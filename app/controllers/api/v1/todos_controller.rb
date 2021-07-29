@@ -6,6 +6,8 @@ class Api::V1::TodosController < ApplicationController
   def index
     @todos = if current_user
                Todo.where(user_id: current_user.id)
+             elsif current_department
+               Todo.joins(:user).where(user: { department_id: current_department.id })
              else
                Todo.all
              end
