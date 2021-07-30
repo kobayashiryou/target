@@ -7,7 +7,7 @@ RSpec.describe "Todo", type: :request do
     let!(:company) { create(:company) }
     let(:todos) { Todo.where(user_id: user.id) }
     let(:a_todos) { Todo.where(user_id: a_user.id) }
-    let!(:department) { create(:department) }
+    let!(:department) { create(:department, company: company) }
     let!(:user) { create(:user, department_id: department.id) }
     let!(:a_user) { create(:user) }
     before do
@@ -16,10 +16,11 @@ RSpec.describe "Todo", type: :request do
     end
 
     context "companyがログインしている時" do
-      it "todo一覧が全て表示される" do
+      it "companyに所属するuserのtodo一覧が全て表示される" do
         sign_in company
         subject
-        expect(response.body).to include todos[0].body.to_s && a_todos[0].body.to_s
+        expect(response.body).to include todos[0].body.to_s
+        expect(response.body).to not_include a_todos[0].body.to_s
         expect(response).to have_http_status(:ok)
       end
     end
