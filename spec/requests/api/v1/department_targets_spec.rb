@@ -7,7 +7,7 @@ RSpec.describe "DepartmentTarget", type: :request do
     let!(:company) { create(:company) }
     let(:targets) { DepartmentTarget.where(department_id: department.id) }
     let(:a_targets) { DepartmentTarget.where(department_id: a_department.id) }
-    let!(:department) { create(:department) }
+    let!(:department) { create(:department, company_id: company.id) }
     let!(:a_department) { create(:department) }
     let!(:user) { create(:user, department_id: department.id) }
     before do
@@ -16,10 +16,11 @@ RSpec.describe "DepartmentTarget", type: :request do
     end
 
     context "companyがログインしている時" do
-      it "department_target一覧が全て表示される" do
+      it "ログインしている会社のdepartment_target一覧が全て表示される" do
         sign_in company
         subject
-        expect(response.body).to include targets[0].monthly_target.to_s && a_targets[0].monthly_target.to_s
+        expect(response.body).to include targets[0].monthly_target.to_s
+        expect(response.body).to not_include a_targets[0].monthly_target.to_s
         expect(response).to have_http_status(:ok)
       end
     end

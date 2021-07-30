@@ -9,7 +9,8 @@ class Api::V1::TodosController < ApplicationController
              elsif current_department
                Todo.joins(:user).where(user: { department_id: current_department.id })
              else
-               Todo.all
+               current_company
+               Todo.joins(user: :department).where(department: { company_id: current_company.id })
              end
   end
 

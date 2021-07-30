@@ -5,15 +5,42 @@ RSpec.describe "CompanyTarget", type: :request do
     subject { get(api_v1_company_targets_path) }
 
     let(:company) { create(:company) }
+    let(:a_company) { create(:company) }
+    let(:department) { create(:department, company: company) }
+    let(:user) { create(:user, department: department) }
+    let(:targets) { CompanyTarget.where(company_id: company.id) }
+    let(:a_targets) { CompanyTarget.where(company_id: a_company.id) }
     before do
       create_list(:company_target, 3, company: company)
+      create_list(:company_target, 2, company: a_company)
     end
 
     context "companyがログインしている時" do
-      it "一覧が表示される" do
+      it "ログインしているcompanyの一覧が表示される" do
         sign_in company
         subject
-        expect(company.company_targets.length).to eq 3
+        expect(response.body).to include targets[0].monthly_target.to_s
+        expect(response.body).to not_include a_targets[0].monthly_target.to_s
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context "departmentがログインしている時" do
+      it "departmentが所属するcompanyの一覧が表示される" do
+        sign_in department
+        subject
+        expect(response.body).to include targets[0].monthly_target.to_s
+        expect(response.body).to not_include a_targets[0].monthly_target.to_s
+        expect(response).to have_http_status(:ok)
+      end
+    end
+
+    context "userがログインしている時" do
+      it "userが所属するcompanyの一覧が表示される" do
+        sign_in user
+        subject
+        expect(response.body).to include targets[0].monthly_target.to_s
+        expect(response.body).to not_include a_targets[0].monthly_target.to_s
         expect(response).to have_http_status(:ok)
       end
     end

@@ -10,7 +10,7 @@ class Api::V1::DepartmentTargetsController < ApplicationController
     elsif current_user
       @department_targets = DepartmentTarget.where(department_id: current_user.department_id)
     elsif current_company
-      @department_targets = DepartmentTarget.all
+      @department_targets = DepartmentTarget.joins(:department).where(department: { company_id: current_company.id })
     end
   end
 
