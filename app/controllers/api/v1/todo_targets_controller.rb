@@ -10,7 +10,7 @@ class Api::V1::TodoTargetsController < ApplicationController
     elsif current_user
       @todo_targets = TodoTarget.where(department_id: current_user.department_id)
     elsif current_company
-      @todo_targets = TodoTarget.all
+      @todo_targets = TodoTarget.joins(:department).where(department: {company_id: current_company.id})
     end
   end
 

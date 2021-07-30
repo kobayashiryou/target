@@ -8,8 +8,8 @@ class Api::V1::TodosController < ApplicationController
                Todo.where(user_id: current_user.id)
              elsif current_department
                Todo.joins(:user).where(user: { department_id: current_department.id })
-             else
-               Todo.all
+             else current_company
+               Todo.joins(user: :department).where(department: { company_id: current_company.id })
              end
   end
 

@@ -4,7 +4,14 @@ class Api::V1::CompanyTargetsController < ApplicationController
   before_action :authenticate_company!, only: %i[new create edit update destroy]
   # GET /company_targets or /company_targets.json
   def index
-    @company_targets = CompanyTarget.all
+    if current_company
+      @company_targets = CompanyTarget.where(company_id: current_company.id)
+    elsif current_department
+      @company_targets = CompanyTarget.where(company_id: current_department.company_id)
+    elsif current_user
+      department = Department.find_by(id: current_user.department_id)
+      @company_targets = CompanyTarget.where(company_id: department.company_id)
+    end
   end
 
   # GET /company_targets/1 or /company_targets/1.json
