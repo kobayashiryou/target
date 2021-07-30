@@ -5,9 +5,9 @@ RSpec.describe "CompanyTarget", type: :request do
     subject { get(api_v1_company_targets_path) }
 
     let(:company) { create(:company) }
-    let(:a_company){ create(:company) }
-    let(:department){ create(:department, company: company) }
-    let(:user){ create(:user, department: department) }
+    let(:a_company) { create(:company) }
+    let(:department) { create(:department, company: company) }
+    let(:user) { create(:user, department: department) }
     let(:targets) { CompanyTarget.where(company_id: company.id) }
     let(:a_targets) { CompanyTarget.where(company_id: a_company.id) }
     before do

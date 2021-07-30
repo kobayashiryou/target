@@ -35,11 +35,11 @@ group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "factory_bot_rails"
   gem "faker"
+  gem "mysql2", "~> 0.5"
   gem "pry-rails"
   gem "rspec-rails"
   gem "rubocop-rails", require: false
   gem "rubocop-rspec", require: false
-  gem "mysql2", "~> 0.5"
 end
 
 group :development do
