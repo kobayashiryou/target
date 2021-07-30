@@ -13,6 +13,9 @@ Rails.application.routes.draw do
         sessions: "api/v1/users/sessions",
         registrations: "api/v1/users/registrations",
       }
+      devise_scope :api_v1_user do
+        post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
+      end
       resources :company_targets
       resources :department_targets
       resources :todo_targets
