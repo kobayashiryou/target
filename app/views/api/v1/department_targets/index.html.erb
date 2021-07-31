@@ -30,7 +30,7 @@
     </div>
   </div>
 </nav>
-<div class="p-5 text-center mb-2 bg-light text-black">
+<div class="p-5 text-center mb-2 text-black">
   <section class="text-center m-5">
     <p id="notice"><%= notice %></p>
 
@@ -39,7 +39,7 @@
     <div class="p-3 mb-2 bg-dark text-white">
       <h3>今年度目標</h3>
     </div>
-    <div class="p-3 mb-2 bg-light text-dark">
+    <div class="p-3 mb-2 bg-success text-white">
       <% @department_targets.each do |department_target| %>
         <%if current_api_v1_department%>
           <h5><%= link_to "#{Department.find(department_target.department_id).departmentname}:#{department_target.anually_target}", [:api, :v1, department_target], class: "link-dark" %></h5>
@@ -62,7 +62,7 @@
       <tbody>
         <% @department_targets.each do |department_target| %>
           <tr class=>
-            <td><%= department_target.month %></td>
+            <td><%= department_target.month %>月</td>
             <td></td>
             <%if current_api_v1_department%>
               <td><%= link_to department_target.monthly_target, [:api, :v1, department_target], class: "link-dark" %></td>
