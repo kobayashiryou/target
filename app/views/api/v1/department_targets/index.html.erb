@@ -34,46 +34,95 @@
   <section class="text-center m-5">
     <p id="notice"><%= notice %></p>
 
-    <h1>部署目標</h1>
-
-    <div class="p-3 mb-2 bg-dark text-white">
-      <h3>今年度目標</h3>
-    </div>
-    <div class="p-3 mb-2 bg-success text-white">
-      <% @department_targets.each do |department_target| %>
-        <%if current_api_v1_department%>
-          <h5><%= link_to "#{Department.find(department_target.department_id).departmentname}:#{department_target.anually_target}", [:api, :v1, department_target], class: "link-dark" %></h5>
-        <%else%>
-          <h5><%= "#{Department.find(department_target.department_id).departmentname}:#{department_target.anually_target}" %><h5>
-        <%end%>
-      <%end%>
-    </div>
-
-    <table class="table table-hover">
-      <thead class="table-dark">
+    <%if current_api_v1_department %>
+      <h3><%= "部署名：#{current_api_v1_department.departmentname}" %></h3>
+    <%elsif current_api_v1_user%>
+      <h3><%= "部署名：#{Department.find(current_api_v1_user.department_id).departmentname}"%></h3>
+    <%end%>
+    <table class="table table-dark">
+      <thead class="table-success">
         <tr>
-          <th scope="col">月</th>
-          <th scope="col"></th>
-          <th scope="col">月間目標</th>
+          <th scope="col">部署</th>
+          <th scope="col">今年度目標</th>
           <th scope="col"></th>
           <th scope="col"></th>
         </tr>
       </thead>
-      <tbody>
-        <% @department_targets.each do |department_target| %>
-          <tr class=>
-            <td><%= department_target.month %>月</td>
-            <td></td>
-            <%if current_api_v1_department%>
-              <td><%= link_to department_target.monthly_target, [:api, :v1, department_target], class: "link-dark" %></td>
-            <%else%>
-              <td><%= department_target.monthly_target %></td>
-            <%end%>
-            <td></td>
-            <td></td>
-          </tr>
+
+      <% @department_targets.each do |department_target| %>
+        <%if department_target.anually_target == ""%>
+          <tbody></tbody>
+        <%else%>
+          <tbody>
+            <tr class=>
+              <td><%= Department.find(department_target.department_id).departmentname %></td>
+              <%if current_api_v1_department%>
+                <td><%= link_to department_target.anually_target, [:api, :v1, department_target], class: "link-light" %></td>
+              <%else%>
+                <td><%= department_target.anually_target %></td>
+              <%end%>
+              <td></td>
+              <td></td>
+            </tr>
+          </tbody>
         <%end%>
-      </tbody>
+      <%end%>
     </table>
+
+    <%if current_api_v1_company%>
+      <table class="table table-hover">
+        <thead class="table-success">
+          <tr>
+            <th scope="col">月</th>
+            <th scope="col">部署</th>
+            <th scope="col">月間目標</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @department_targets.each do |department_target| %>
+            <tr class=>
+              <td><%= department_target.month %>月</td>
+              <td><%= Department.find(department_target.department_id).departmentname %></td>
+              <%if current_api_v1_department%>
+                <td><%= link_to department_target.monthly_target, [:api, :v1, department_target], class: "link-dark" %></td>
+              <%else%>
+                <td><%= department_target.monthly_target %></td>
+              <%end%>
+              <td></td>
+              <td></td>
+            </tr>
+          <%end%>
+        </tbody>
+      </table>
+    <%else%>
+      <table class="table table-hover">
+        <thead class="table-success">
+          <tr>
+            <th scope="col">月</th>
+            <th scope="col"></th>
+            <th scope="col">月間目標</th>
+            <th scope="col"></th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @department_targets.each do |department_target| %>
+            <tr class=>
+              <td><%= department_target.month %>月</td>
+              <td></td>
+              <%if current_api_v1_department%>
+                <td><%= link_to department_target.monthly_target, [:api, :v1, department_target], class: "link-dark" %></td>
+              <%else%>
+                <td><%= department_target.monthly_target %></td>
+              <%end%>
+              <td></td>
+              <td></td>
+            </tr>
+          <%end%>
+        </tbody>
+      </table>
+    <%end%>
   </section>
 </div>
