@@ -11,7 +11,7 @@ class Api::V1::DepartmentTargetsController < ApplicationController
       @department_targets = DepartmentTarget.where(department_id: current_user.department_id)
     elsif current_company
       department_targets = DepartmentTarget.joins(:department).where(department: { company_id: current_company.id })
-      @department_targets = department_targets.to_a.sort { |a,b| a[:month] <=> b[:month] }
+      @department_targets = department_targets.to_a.sort {|a, b| a[:month] <=> b[:month] }
     end
   end
 
@@ -58,7 +58,7 @@ class Api::V1::DepartmentTargetsController < ApplicationController
 
   # DELETE /department_targets/1 or /department_targets/1.json
   def destroy
-    @department_target.destroy
+    @department_target.destroy!
     respond_to do |format|
       format.html { redirect_to api_v1_department_targets_url, notice: "Department target was successfully destroyed." }
       format.json { head :no_content }
