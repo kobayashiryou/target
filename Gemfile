@@ -37,6 +37,7 @@ group :development, :test do
   gem "faker"
   gem "mysql2", "~> 0.5"
   gem "pry-rails"
+  gem "rspec_junit_formatter"
   gem "rspec-rails"
   gem "rubocop-rails", require: false
   gem "rubocop-rspec", require: false
