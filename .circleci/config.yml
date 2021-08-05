@@ -70,15 +70,15 @@ jobs:
       - run:
           name: Run rspwc
           command: |
-          mkdir /tmp/test-results
-          mkdir -p ~/rspec
-          bundle exec rails db:create db:migrate
-          TEST_FILES="$(circleci tests glob \"spec/**/*_spec.rb\" | circleci tests split --split-by=timings)"
-          bundle exec rspec --require rails_helper \
-                    --color \
-                    --format progress \
-                    --format RspecJunitFormatter \
-                    --out ~/rspec/rspec.xml
+            mkdir /tmp/test-results
+            mkdir -p ~/rspec
+            bundle exec rails db:create db:migrate
+            TEST_FILES="$(circleci tests glob \"spec/**/*_spec.rb\" | circleci tests split --split-by=timings)"
+            bundle exec rspec --require rails_helper \
+                      --color \
+                      --format progress \
+                      --format RspecJunitFormatter \
+                      --out ~/rspec/rspec.xml
       - store_test_results:
           path: ~/rspec
       - store_artifacts:
