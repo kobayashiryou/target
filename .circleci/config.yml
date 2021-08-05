@@ -68,7 +68,10 @@ jobs:
           command: |
             bundle exec rails db:create db:migrate db:seed db:drop
       - run:
-          name: Run rspwc
+          name: yarn Install
+          command: yarn install
+      - run:
+          name: Run rspec
           command: |
             mkdir /tmp/test-results
             mkdir -p ~/rspec
