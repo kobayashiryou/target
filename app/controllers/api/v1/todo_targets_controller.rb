@@ -62,7 +62,7 @@ class Api::V1::TodoTargetsController < ApplicationController
 
   # DELETE /todo_targets/1 or /todo_targets/1.json
   def destroy
-    @todo_target.destroy
+    @todo_target.destroy!
     respond_to do |format|
       format.html { redirect_to api_v1_todo_targets_url, notice: "Todo target was successfully destroyed." }
       format.json { head :no_content }

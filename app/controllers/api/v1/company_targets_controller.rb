@@ -57,7 +57,7 @@ class Api::V1::CompanyTargetsController < ApplicationController
 
   # DELETE /company_targets/1 or /company_targets/1.json
   def destroy
-    @company_target.destroy
+    @company_target.destroy!
     respond_to do |format|
       format.html { redirect_to api_v1_company_targets_url, notice: "Company target was successfully destroyed." }
       format.json { head :no_content }
