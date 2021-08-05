@@ -2,7 +2,7 @@ version: 2.1
 executors:
   default_container:
     docker:
-      - image: circleci/ruby:2.7.2 -node
+      - image: circleci/ruby:2.7.2-node
         environment:
           RAILS_ENV: test
           BUNDLE_JOBS: 4
@@ -28,7 +28,7 @@ jobs:
     steps:
       - checkout
       - save_cache:
-          key: v1 -target-{{.Environment.CIRCLE_SHA1}}
+          key: v1 -target-{{.Enviroment.CIRCLE_SHA1}}
           paths:
             - ~/target
   bundle_dependencies:
@@ -36,7 +36,7 @@ jobs:
       name: default_container
     steps:
       - restore_cache:
-          key: v1 -target-{{ .Environment.CIRCLE_SHA1 }}
+          key: v1 -target-{{ .Enviroment.CIRCLE_SHA1 }}
       - restore_cache:
           key: v1 -dependencies-{{ checksum "Gemfile.lock" }}
       - install_bundler
@@ -53,7 +53,7 @@ jobs:
       name: default_container
     steps:
       - restore_cache:
-          key: v1 -target-{{ .Environment.CIRCLE_SHA1 }}
+          key: v1 -target-{{ .Enviroment.CIRCLE_SHA1 }}
       - restore_cache:
           key: v1 -dependencies-{{ checksum "Gemfile.lock" }}
       - run:
@@ -89,9 +89,9 @@ jobs:
       name: default_container
     steps:
       - restore_cache:
-          key:  v1 -target-{{ .Environment.CIRCLE_SHA1 }}
+          key: v1 -target-{{ .Enviroment.CIRCLE_SHA1 }}
       - restore_cache:
-          key:  v1 -dependencies-{{ checksum "Gemfile.lock" }}
+          key: v1 -dependencies-{{ checksum "Gemfile.lock" }}
       - install_bundler
       - run:
           name: Execute rubocop
