@@ -52,6 +52,7 @@
 - Rails 6.1.4
 - Docker
 - MySQL
+- CircleCI(RSpec、Rubocop)
 
 ### 主要gem
 
@@ -74,3 +75,4 @@
 
 - 解説記事としてQiita記事を執筆した。
 
+https://qiita.com/kobayashiryou/items/e2f65edeb6da53601711
