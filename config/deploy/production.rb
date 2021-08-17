@@ -1,4 +1,4 @@
-server "ElatsticIP", user: "ryou", roles: %w[app db web]
+server "35.72.197.141", user: "ryou", roles: %w[app db web]
 
 set :ssh_options, {
   keys: %w[~/.ssh/target.pem],
