@@ -50,5 +50,6 @@ test:
 production:
   <<: *default
   database: target_production
-  username: target_clone
-  password: <%= ENV['TARGET_DATABASE_PASSWORD'] %>
+  username: root
+  password: <%= Rails.application.credentials.db[:password] %>
+  host: <%= Rails.application.credentials.db[:hostname] %>
