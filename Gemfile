@@ -35,7 +35,6 @@ group :development, :test do
   gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
   gem "factory_bot_rails"
   gem "faker"
-  gem "mysql2", "~> 0.5"
   gem "pry-rails"
   gem "rspec_junit_formatter"
   gem "rspec-rails"
@@ -68,7 +67,7 @@ group :test do
   gem "webdrivers"
 end
 
-group :production do
+group :development, :test, :production do
   gem "mysql2", "~> 0.5"
 end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
