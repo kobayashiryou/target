@@ -62,6 +62,7 @@
 - `Faker` : `RSpec`のテスト実装時、使用
 - `RuboCop` : Rubyの静的コード解析
 - `bootstrap` : フロントエンド実装
+- `capistrano`:　　デプロイ時使用
 
 ### ER図
 
