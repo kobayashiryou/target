@@ -67,9 +67,13 @@
 
 <img width="1379" alt="スクリーンショット 2021-08-04 15 13 54" src="https://user-images.githubusercontent.com/80399352/128131114-54184251-59e9-48d2-9667-61c7384d783d.png">
 
-### デプロイ
+### インフラ構成図
 
-- Herokuサービスを使用
+- ~~Herokuサービスを使用~~
+- AWS(EC2 / VPC / RDS/ Route53)でのデプロイ
+
+![Untitled Diagram](https://user-images.githubusercontent.com/80399352/129828414-590ecf2c-0fa4-4745-86e2-97f874db1319.png)
+
 
 ### Qiita記事
 
