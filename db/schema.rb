@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_07_26_123705) do
+ActiveRecord::Schema.define(version: 2021_08_23_043103) do
 
   create_table "companies", charset: "utf8", force: :cascade do |t|
     t.string "companyname", default: "", null: false
@@ -78,6 +78,14 @@ ActiveRecord::Schema.define(version: 2021_07_26_123705) do
     t.index ["user_id"], name: "index_todos_on_user_id"
   end
 
+  create_table "tweets", charset: "utf8", force: :cascade do |t|
+    t.text "body"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_tweets_on_user_id"
+  end
+
   create_table "users", charset: "utf8", force: :cascade do |t|
     t.string "username", default: "", null: false
     t.string "email", default: "", null: false
@@ -99,5 +107,6 @@ ActiveRecord::Schema.define(version: 2021_07_26_123705) do
   add_foreign_key "todo_targets", "departments"
   add_foreign_key "todos", "todo_targets"
   add_foreign_key "todos", "users"
+  add_foreign_key "tweets", "users"
   add_foreign_key "users", "departments"
 end

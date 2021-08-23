@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       resources :department_targets
       resources :todo_targets
       resources :todos
+      resources :tweets
     end
   end
 
