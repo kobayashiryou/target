@@ -68,10 +68,10 @@ group :test do
 end
 
 group :development, :test, :production do
-  gem "mysql2", "~> 0.5"
-  gem 'carrierwave'
-  gem 'fog-aws'
+  gem "carrierwave"
+  gem "fog-aws"
   gem "mini_magick"
+  gem "mysql2", "~> 0.5"
 end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: [:mingw, :mswin, :x64_mingw, :jruby]
