@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :todos, dependent: :destroy
   belongs_to :department
   validates :username, uniqueness: { case_sensitive: true }, presence: true
-
+  mount_uploader :image, UserUploader
   def self.guest
     guestcompany = Company.find_or_create_by!(email: "guest_company@example.com") do |company|
       company.password = "guestcompany"
