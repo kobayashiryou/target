@@ -13,11 +13,11 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
+    <%= f.label :password %> <i>(更新しない場合、空欄のまま)</i><br />
     <%= f.password_field :password, autocomplete: "new-password" %>
     <% if @minimum_password_length %>
       <br />
-      <em><%= @minimum_password_length %> characters minimum</em>
+      <em><%= @minimum_password_length %> 文字以上</em>
     <% end %>
   </div>
 
@@ -27,12 +27,36 @@
   </div>
 
   <div class="field">
-    <%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
+    <%= f.label :current_password %> <i>(更新する場合、パスワードを入力してください)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
   <div class = "field">
+    <div class="labal">
+      <%= f.label :プロフィール画像を選んでください %>
+    </div>
     <%= f.file_field :image %>
+  </div>
+
+  <div class = "field">
+    <div class="labal">
+      <%= f.label :自己紹介文を入力してください %>
+    </div>
+    <%= f.text_area :profile %>
+  </div>
+
+  <div class = "field">
+    <div class="labal">
+      <%= f.label :入社年月日を選択してください %>
+    </div>
+    <%= f.date_field :joining %>
+  </div>
+
+  <div class = "field">
+    <div class="labal">
+      <%= f.label :趣味を入力してください %>
+    </div>
+    <%= f.text_area :hobby %>
   </div>
 
   <div class="actions">
