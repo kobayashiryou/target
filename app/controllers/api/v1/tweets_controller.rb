@@ -45,7 +45,7 @@ class Api::V1::TweetsController < ApplicationController
   def destroy
     @tweet.destroy!
     respond_to do |format|
-      format.html { redirect_to api_v1_todos_url, notice: "Todo was successfully destroyed." }
+      format.html { redirect_to api_v1_todos_url, notice: "投稿を削除しました。" }
     end
   end
 
@@ -60,7 +60,7 @@ class Api::V1::TweetsController < ApplicationController
     end
 
     def move_to_signed_in
-      unless user_sign_in? || department_signed_in? || company_signed_in?
+      unless user_signed_in? || department_signed_in? || company_signed_in?
         redirect_to api_v1_user_session_url
       end
     end
