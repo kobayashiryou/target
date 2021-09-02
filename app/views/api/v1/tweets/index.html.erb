@@ -1,0 +1,38 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tweets</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tweets.each do |tweet| %>
+      <tr>
+        <td>
+          <div class="card">
+            <div class="card-body">
+              <%= tweet.body %>
+              <div>
+                <%= link_to 'Show', [:api, :v1, tweet] %>
+                <%= link_to 'Edit', edit_api_v1_tweet_path(tweet) %>
+                <%= link_to 'Destroy', [:api, :v1, tweet], method: :delete, data: { confirm: 'Are you sure?' } %>
+              </div>
+            </div>
+            <%= link_to tweet.image.to_s, "data-lightbox": tweet.image.to_s do %>
+              <%= image_tag tweet.image.to_s, size: "200x200" %>
+            <%end%>
+          </div>
+        </td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>
+
+
+
+<br>
+
+<%= link_to 'New Tweet', new_api_v1_tweet_path %>
