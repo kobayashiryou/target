@@ -1,7 +1,7 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Tweets</h1>
-
+<i class="bi bi-hand-thumbs-up"></i>
 <table>
   <thead>
     <tr>
@@ -19,6 +19,15 @@
                 <%= link_to 'Show', [:api, :v1, tweet] %>
                 <%= link_to 'Edit', edit_api_v1_tweet_path(tweet) %>
                 <%= link_to 'Destroy', [:api, :v1, tweet], method: :delete, data: { confirm: 'Are you sure?' } %>
+                <%if Like.find_by(tweet_id: tweet.id, user_id: current_api_v1_user.id) != nil %>
+                  <%= button_to api_v1_like_path(Like.find_by(tweet_id: tweet.id, user_id: current_api_v1_user.id).id), { method: :delete, class: "btn btn-success"} do %>
+                    <i class="bi bi-hand-thumbs-up"></i>
+                  <%end%>
+                <%else%>
+                  <%= button_to api_v1_likes_path(params: {like: {user_id: current_api_v1_user.id, tweet_id: tweet.id}}), class: "btn btn-danger" do %>
+                    <i class="bi bi-hand-thumbs-up"></i>
+                  <%end%>
+                <%end%>
               </div>
             </div>
             <%= link_to tweet.image.to_s, "data-lightbox": tweet.image.to_s do %>
@@ -30,7 +39,6 @@
     <%end%>
   </tbody>
 </table>
-
 
 
 <br>

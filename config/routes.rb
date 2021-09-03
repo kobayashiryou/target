@@ -21,6 +21,7 @@ Rails.application.routes.draw do
       resources :todo_targets
       resources :todos
       resources :tweets
+      resources :likes, only: [:create, :destroy]
     end
   end
 
