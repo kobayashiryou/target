@@ -4,8 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
   has_many :todos, dependent: :destroy
-  has_many :tweets, dependent: :destroy, through: :likes
   has_many :likes, dependent: :destroy
+  has_many :tweets, dependent: :destroy
+  has_many :like_tweets, through: :likes, source: :tweet
   belongs_to :department
   validates :username, uniqueness: { case_sensitive: true }, presence: true
   mount_uploader :image, UserUploader
@@ -24,5 +25,21 @@ class User < ApplicationRecord
       user.username = "guest"
       user.department_id = guestdepartment.id
     end
+  end
+
+  def own?(object)
+    id == object.user_id
+  end
+
+  def like(tweet)
+    likes.find_or_create_by!(tweet: tweet)
+  end
+
+  def like?(tweet)
+    like_tweets.include?(tweet)
+  end
+
+  def unlike(tweet)
+    like_tweets.delete(tweet)
   end
 end

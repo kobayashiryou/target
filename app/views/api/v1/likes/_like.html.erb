@@ -1,0 +1,9 @@
+<%if current_api_v1_user.like?(tweet.id) %>
+  <%= link_to api_v1_likes_path(tweet_id: tweet.id), {method: :post, class: "btn btn-danger"}, remote: true do %>
+    <i class="bi bi-hand-thumbs-up"></i>
+  <%end%>
+<%else%>
+  <%= link_to api_v1_like_path(tweet.id), { method: :delete, class: "btn btn-success"}, remote: true do %>
+    <i class="fab fa-twitter"></i>
+  <%end%>
+<%end%>
