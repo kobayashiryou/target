@@ -4,7 +4,7 @@ class Api::V1::TweetsController < ApplicationController
 
   def index
     if current_user
-      @tweets = Tweet.where(user_id: current_user.id)
+      @tweets = Tweet.joins(user: :department).where(department: { company_id: current_user.department.company_id }).order(created_at: "DESC")
     end
   end
 
