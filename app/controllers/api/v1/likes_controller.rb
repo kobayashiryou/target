@@ -2,22 +2,13 @@ class Api::V1::LikesController < ApplicationController
   before_action :move_to_signed_in
 
   def create
-    @like = current_user.likes.new(like_params)
-    respond_to do |format|
-      if @like.save
-        format.html { redirect_to api_v1_tweets_path }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-      end
-    end
+    @tweet = Tweet.find(params[:tweet])
+    current_user.like(@tweet)
   end
 
   def destroy
-    @tweet = Tweet.find(params[:id])
+    @tweet = Like.find(params[:id]).tweet
     current_user.unlike(@tweet)
-    respond_to do |format|
-      format.html { redirect_to api_v1_tweets_path }
-    end
   end
 
   private

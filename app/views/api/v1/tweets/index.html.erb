@@ -1,36 +1,63 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Tweets</h1>
-<table>
-  <thead>
-    <tr>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @tweets.each do |tweet| %>
+<div class="table-responsive-xxl" style="max-width: 540px;">
+  <table class="table table-bordered border-dark">
+    <thead>
       <tr>
-        <td>
-          <div class="card">
-            <div class="card-body">
-              <%= tweet.body %>
-              <div>
-                <%= link_to 'Show', [:api, :v1, tweet] %>
-                <%= link_to 'Edit', edit_api_v1_tweet_path(tweet) %>
-                <%= link_to 'Destroy', [:api, :v1, tweet], method: :delete, data: { confirm: 'Are you sure?' } %>
-                <div id="like_button_<%= tweet.id %>">
-                  <%= render partial: "api/v1/likes/like", locals: { tweet: tweet, current_api_v1_user: current_api_v1_user}%>
-              </div>
-            </div>
-            <%= link_to tweet.image.to_s, "data-lightbox": tweet.image.to_s do %>
-              <%= image_tag tweet.image.to_s, size: "200x200" %>
-            <%end%>
-          </div>
-        </td>
+        <th class="table-success" style="text-align: center">みんなの活動</th>
       </tr>
-    <%end%>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @tweets.each do |tweet| %>
+        <tr>
+          <td>
+            <div class="card" style="max-width: 540px;">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-2">
+                    <%if tweet.user.image? %>
+                      <%= link_to tweet.user.image.to_s, "data-lightbox": User.find_by(id: tweet.user_id).image.to_s do%>
+                        <%= image_tag tweet.user.image.to_s, size: "200x200" %>
+                      <%end%>
+                    <%else%>
+                      <%= image_tag "/images/default.jpeg", size: "50x50"%>
+                      <%= tweet.user.username %>
+                    <%end%>
+                  </div>
+                  <div class="col-10">
+                    <%= tweet.body %>
+                  </div>
+                </div>
+                <div style="text-align: right">
+                  <%= tweet.created_at.to_s(:datetime_jp) %>
+                  <%if tweet.user%>
+                    <%= link_to edit_api_v1_tweet_path(tweet) do %>
+                      <i class="fas fa-pencil-alt"></i>
+                    <%end%>
+                    <%= link_to [:api, :v1, tweet], method: :delete, data: { confirm: 'Are you sure?' } do %>
+                      <i class="far fa-trash-alt"></i>
+                    <%end%>
+                  <%end%>
+                  <span id="like_button_<%= tweet.id %>">
+                    <%= render partial: "api/v1/likes/like", locals: { tweet: tweet, current_api_v1_user: current_api_v1_user}%>
+                  </span>
+                </div>
+              </div>
+              <%if tweet.image?%>
+                <div class="border-top bg-dark" style="text-align: center">
+                  <%= link_to tweet.image.to_s, "data-lightbox": tweet.image.to_s do %>
+                    <%= image_tag tweet.image.to_s, size: "200x200" %>
+                  <%end%>
+                </div>
+              <%end%>
+            </div>
+          </td>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>
+</div>
 
 
 <br>
