@@ -1,9 +1,9 @@
-<%if current_api_v1_user.like?(tweet.id) %>
-  <%= link_to api_v1_likes_path(tweet_id: tweet.id), {method: :post, class: "btn btn-danger"}, remote: true do %>
-    <i class="bi bi-hand-thumbs-up"></i>
+<%if current_api_v1_user&.like?(tweet) %>
+  <%= link_to api_v1_like_path(current_api_v1_user.likes.find_by(tweet: tweet)), method: :delete, class: "link-danger", remote: true do %>
+    <i class="fas fa-heart"><%= tweet.likes.count %></i>
   <%end%>
 <%else%>
-  <%= link_to api_v1_like_path(tweet.id), { method: :delete, class: "btn btn-success"}, remote: true do %>
-    <i class="fab fa-twitter"></i>
+  <%= link_to api_v1_likes_path(tweet: tweet), method: :post, class: "link-danger", remote: true do %>
+    <i class="far fa-heart"></i>
   <%end%>
 <%end%>
