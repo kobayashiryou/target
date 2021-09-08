@@ -1,7 +1,6 @@
 class Api::V1::TweetLikesController < ApplicationController
-
   def index
-    @tweet_likes = Tweet.includes(:likes).where(likes: {user_id: current_user.id}).order(created_at: "DESC")
+    @tweet_likes = Tweet.includes(:likes).where(likes: { user_id: current_user.id }).order(created_at: "DESC")
   end
 
   private
