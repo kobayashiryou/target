@@ -1,0 +1,55 @@
+<div class="table-responsive">
+  <table class="table table-bordered border-success" style="width: 100%">
+    <thead>
+      <tr>
+        <th class="table-success" style="text-align: center; position: -webkit-sticky; position: sticky; top: 0; z-index: 2;">いいねした活動</th>
+      </tr>
+    </thead>
+    <div>
+      <tbody style="display: block; overflow-y:scroll; height:500px; width: 100%">
+        <% @tweets.each do |tweet|%>
+          <tr style="display: block; width: 100%;">
+            <td style="display: block; width: 100%; padding: 10px;">
+              <div class="row" style="padding:10px">
+                <div class="col-2">
+                  <%if tweet.user.image? %>
+                    <%= link_to tweet.user.image.to_s, "data-lightbox": User.find_by(id: tweet.user_id).image.to_s do%>
+                      <%= image_tag tweet.user.image.to_s, size: "200x200" %>
+                    <%end%>
+                  <%else%>
+                    <%= image_tag "/images/default.jpeg", class:"rounded-circle border border-dark", size: "50x50"%>
+                    <%= tweet.user.username %>
+                  <%end%>
+                </div>
+                <div class="col-10">
+                  <%= tweet.body %>
+                </div>
+              </div>
+              <div style="text-align: right">
+                <%= tweet.created_at.to_s(:datetime_jp) %>
+                <%if tweet.user%>
+                  <%= link_to edit_api_v1_tweet_path(tweet) do %>
+                    <i class="fas fa-pencil-alt" style="color: limegreen;"></i>
+                  <%end%>
+                  <%= link_to [:api, :v1, tweet], method: :delete, data: { confirm: "本当に削除しますか?" } do %>
+                    <i class="far fa-trash-alt" style="color: limegreen;"></i>
+                  <%end%>
+                <%end%>
+                <span id="like_button_<%= tweet.id %>">
+                  <%= render partial: "api/v1/likes/like", locals: { tweet: tweet, current_api_v1_user: current_api_v1_user}%>
+                </span>
+              </div>
+              <%if tweet.image?%>
+                <div class="border-top bg-dark" style="text-align: center">
+                  <%= link_to tweet.image.to_s, "data-lightbox": tweet.image.to_s do %>
+                    <%= image_tag tweet.image.to_s, size: "200x200" %>
+                  <%end%>
+                </div>
+              <%end%>
+            </td>
+          </tr>
+        <%end%>
+      </tbody>
+    </div>
+  </table>
+</div>
