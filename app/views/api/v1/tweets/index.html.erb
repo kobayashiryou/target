@@ -1,10 +1,14 @@
+<%= render "layouts/header"%>
+
 <p id="notice"><%= notice %></p>
 
-<div class="container">
-  <div class="row">
-    <div class="col-lg-6">
+<div class="container" style="margin-top: 100px">
+  <div class="row" style="margin: 0 auto;">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-10">
       <div class="table-responsive">
-        <table class="table table-bordered border-success" style="width: 100%">
+        <table class="table table-bordered border-success">
           <thead>
             <tr>
               <th class="table-success" style="text-align: center; position: -webkit-sticky; position: sticky; top: 0; z-index: 2;">みんなの活動</th>
@@ -59,14 +63,11 @@
         </table>
       </div>
     </div>
-    <div class="col-lg-6">
-      <%= render partial: "api/v1/tweet_likes/index"%>
+    <div class="col-sm-1">
     </div>
   </div>
 </div>
 
 
-
-<br>
 
 <%= link_to 'New Tweet', new_api_v1_tweet_path %>
