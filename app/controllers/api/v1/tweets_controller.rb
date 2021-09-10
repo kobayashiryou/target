@@ -6,6 +6,11 @@ class Api::V1::TweetsController < ApplicationController
     if current_user
       @tweets = Tweet.joins(user: :department).where(department: { company_id: current_user.department.company_id }).order(created_at: "DESC")
     end
+    if params[:id].present?
+      set_tweet
+    else
+      @tweet = current_user.tweets.new
+    end
   end
 
   def show
