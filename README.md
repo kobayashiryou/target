@@ -73,7 +73,7 @@
 - ~~Herokuサービスを使用~~
 - AWS(EC2 / VPC / RDS/ Route53)でのデプロイ
 
-![Untitled Diagram](https://user-images.githubusercontent.com/80399352/129828414-590ecf2c-0fa4-4745-86e2-97f874db1319.png)
+![最低限ec2 (2)](https://user-images.githubusercontent.com/80399352/133927388-b5dcb3fa-0282-4b13-9634-0572367112fd.png)
 
 
 ### Qiita記事
