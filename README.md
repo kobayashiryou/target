@@ -70,7 +70,6 @@
 
 ### インフラ構成図
 
-- ~~Herokuサービスを使用~~
 - AWS(EC2 / VPC / RDS/ Route53)でのデプロイ
 
 ![最低限ec2 (2)](https://user-images.githubusercontent.com/80399352/133927388-b5dcb3fa-0282-4b13-9634-0572367112fd.png)
